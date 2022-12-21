@@ -51,8 +51,8 @@ export default function Game() {
       </Flex>
       <Flex direction={"column"} w="100%" px={3} pt={4}>
         <Flex
-          bg="#fff"
-          color={"#5a72ec"}
+          bg="linear-gradient(180deg, #FF6899 0%, #C9295C 169.88%)"
+          color={"#fff"}
           borderRadius={16}
           p={2}
           my={2}
@@ -61,12 +61,13 @@ export default function Game() {
           fontWeight={"bold"}
           justifyContent="center"
           alignItems={"center"}
+          onClick={() => navigate("/game-over")}
         >
           <Text textAlign="center">Bremen</Text>
         </Flex>
         <Flex
-          bg="#fff"
-          color={"#5a72ec"}
+          bg="linear-gradient(180deg, #FFE000 0%, #799F0C 169.88%)"
+          color={"#ffff"}
           borderRadius={16}
           p={2}
           my={2}
@@ -75,6 +76,7 @@ export default function Game() {
           fontWeight={"bold"}
           justifyContent="center"
           alignItems={"center"}
+          onClick={() => navigate("/winner")}
         >
           <Text textAlign="center">Hamburg</Text>
         </Flex>

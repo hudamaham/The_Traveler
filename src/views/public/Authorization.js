@@ -8,7 +8,7 @@ export default function Authorization() {
     <Flex
       direction={"column"}
       py={3}
-      bg={"linear-gradient(to Right,#5870eb, #17adfb)"}
+      bg={"linear-gradient(95.75deg, #00A95C 81.03%, #FFD700 138.12%)"}
       h={"100vh"}
       alignItems={"center"}
       justifyContent={"space-between"}
@@ -34,16 +34,23 @@ export default function Authorization() {
       >
         <Flex direction={"column"}>
           <Button
-            borderRadius={16}
+            borderRadius={10}
             color={"#000"}
+            mb={2}
             mx={1}
             onClick={() => navigate("/registration")}
           >
             S'inscrire
           </Button>
-          <Text onClick={() => navigate("/login")}>
-            or sign in via <strong style={{ color: "#fff" }}>username</strong>
-          </Text>
+          <Button
+            borderRadius={10}
+            color={"#000"}
+            mx={1}
+            mb={1}
+            onClick={() => navigate("/login")}
+          >
+            Se connecter
+          </Button>
         </Flex>
         <Text px={1}>
           By continuing , you agree to the{" "}

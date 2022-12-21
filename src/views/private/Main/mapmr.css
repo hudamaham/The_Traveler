@@ -1,0 +1,142 @@
+.map{flex:1}
+.map_section{
+ 
+    height: 100%;
+ 
+    display: flex;
+   padding: 10px 5%;
+    overflow-x: hidden;
+
+   
+}
+@media only screen and (max-width: 600px) {
+   .map_section{
+     flex-direction: column;
+        min-height: 100vh;
+            ;
+    }
+  
+ .main_description h1{font-size: 0.8em !important;
+padding: 1rem;}
+
+.main_description span {
+    font-size: 3em !important;
+ 
+}
+
+ 
+}
+.main_description{
+    flex:1;
+    display: flex;
+   flex-direction: column;
+ 
+    justify-content: center;
+    text-align: start;
+}
+.main_description h1 {
+    font: 600 1.5em/1 'Raleway', sans-serif;
+    color: rgba(0, 0, 0, .5);
+    text-align:start;
+    text-transform: uppercase;
+    letter-spacing: .5em;
+    
+  
+}
+
+.main_description span,
+.main_description span:after {
+    font-weight: 900;
+    color: #D01C1F;
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    letter-spacing: .1em;
+    padding: .2em 0 .25em 0;
+}
+
+.main_description span {
+    font-size: 4em;
+    z-index: 100;
+    text-shadow: .04em .04em 0 #9cb8b3;
+}
+
+.main_description span:after {
+    content: attr(data-shadow-text);
+    color: rgba(0, 0, 0, .35);
+    text-shadow: none;
+    position: absolute;
+    left: .0875em;
+    top: .0875em;
+    z-index: -1;
+    -webkit-mask-image: url(//f.cl.ly/items/1t1C0W3y040g1J172r3h/mask.png);
+}
+
+/* // */
+ 
+.side-info-map {
+    border-radius: 0.5rem;
+    /*box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.096),
+    0px 1px 1px rgba(0, 0, 0, 0.062);*/
+}
+
+.side-info-map p {
+    text-align: start;
+
+}
+
+.moukataa {
+    color:#D01C1F;
+}
+
+#MRT2783:hover {
+    fill:#D01C1F;
+}
+
+#MRT2784:hover {
+    fill:#D01C1F;
+}
+
+#MRT2785:hover {
+    fill:#D01C1F;
+}
+
+#MRT2786:hover {
+    fill:#D01C1F;
+}
+
+#MRT2787:hover {
+    fill:#D01C1F;
+}
+
+#MRT2788:hover {
+    fill:#D01C1F;
+}
+
+#MRT2789:hover {
+    fill:#D01C1F;
+}
+
+#MRT2790:hover {
+    fill:#D01C1F;
+}
+
+#MRT2791:hover {
+    fill:#D01C1F;
+}
+
+#MRT2795:hover {
+    fill:#D01C1F;
+}
+
+#MRT2796:hover {
+    fill:#D01C1F;
+}
+
+#MRT2797:hover {
+    fill:#D01C1F;
+}
+
+#MRT2798:hover {
+    fill:#D01C1F;
+}

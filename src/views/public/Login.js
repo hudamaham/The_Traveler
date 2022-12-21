@@ -11,7 +11,7 @@ export default function Login() {
     <Flex
       direction={"column"}
       py={3}
-      bg={"linear-gradient(to Right,#5870eb, #17adfb)"}
+      bg={"linear-gradient(95.75deg, #00A95C 81.03%, #FFD700 138.12%)"}
       h={"100vh"}
       alignItems={"center"}
       justifyContent={"space-between"}
@@ -26,7 +26,7 @@ export default function Login() {
         textAlign={"start"}
         color="#ffff"
       >
-        Veuillez se connecter
+        {" "}
       </Text>
       <Flex
         direction={"column"}
@@ -72,8 +72,8 @@ export default function Login() {
       >
         <Flex direction={"column"}>
           <Button
-            borderRadius={16}
-            color={"#596fec"}
+            borderRadius={10}
+            color={"#252733"}
             mx={3}
             onClick={() => {
               dispatch(logInTemperory());
