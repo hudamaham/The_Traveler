@@ -21,9 +21,7 @@ export default function Profile() {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useSelector((state) => state.authentification);
-  useEffect(() => {
-    console.log(user);
-  });
+
   return (
     <div className="leaderboard">
       <Header title={"Profile"} />

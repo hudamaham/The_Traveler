@@ -4,6 +4,7 @@ import BottomNav from "../../../components/BottomNav";
 import Header from "../../../components/Header";
 import { ReactComponent as Map } from "./mapMR/mr.svg";
 import { useNavigate } from "react-router-dom";
+import clickSound from "../../../assets/audios/click.mp3";
 const regionsIds = [
   "MRT2783",
   "MRT2784",
@@ -40,8 +41,11 @@ export default function Main() {
   const navigate = useNavigate();
   const [cities, setcities] = useState([]);
   const [clicked, setClicked] = useState("0");
-
+  const SoundClick = () => {
+    new Audio(clickSound).play();
+  };
   const ClickedRegion = (id) => {
+    SoundClick();
     document.getElementById("MRT2783").style.fill = "#7c7c7c";
     document.getElementById("MRT2784").style.fill = "#7c7c7c";
     document.getElementById("MRT2785").style.fill = "#7c7c7c";

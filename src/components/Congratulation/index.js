@@ -1,7 +1,8 @@
-import React, { useRef, useEffect } from "react";
-import bgSound from "../../../assets/audios/score.mp3";
-import "./style.scss";
-import Header from "../../../components/Header";
+import "./styles.css";
+import Confetti from "react-confetti";
+import React, { useState, useRef, useEffect } from "react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 const icon = (
   <svg
     version="1.1"
@@ -56,104 +57,77 @@ const icon = (
     </g>
   </svg>
 );
-const leaders = [
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-  {
-    name: "Houda",
-    score: "23.5",
-    img: "https://randomuser.me/api/portraits/men/97.jpg",
-  },
-];
-export default function LeaderBoard() {
-  let audio = useRef();
+export default function Congratulation({ score, total }) {
+  const [height, setHeight] = useState(null);
+  const [width, setWidth] = useState(null);
+  const confetiRef = useRef(null);
+  const navigate = useNavigate();
   useEffect(() => {
-    audio.current = new Audio(bgSound);
-    audio.current.volume = 0.1;
-    // audio.current.loop = true;
-    audio.current.play();
-  }, []);
+    setHeight(confetiRef.current.clientHeight);
+    setWidth(confetiRef.current.clientWidth);
+  }, [confetiRef]);
 
-  useEffect(() => {
-    return () => {
-      audio.current.pause();
-    };
-  }, []);
   return (
-    <article className="leaderboard">
-      <Header icon={icon} title={"Leaderboard"} />
+    <Flex h={"100vh"} w={"100vw"} direction={"column"}>
+      <Box ref={confetiRef} h={"100%"}>
+        <Flex
+          h="100%"
+          direction={"column"}
+          justifyContent={"center"}
+          alignItems="center"
+        >
+          <Flex
+            bg="#fff"
+            zIndex={999}
+            w={{ base: "100%", md: "70%" }}
+            borderRadius={10}
+            direction={"column"}
+            justifyContent={"center"}
+            m={{ base: "1rem", md: 0 }}
+            alignItems="center"
+            boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px;"}
+            pt={5}
+          >
+            <Text color={"#252733"} fontSize={"1.4rem"} fontWeight="bold">
+              Your score{" "}
+            </Text>
+            <Text fontSize={"7rem "} fontWeight="bold">
+              {Math.ceil((score / total) * 100)} %
+            </Text>{" "}
+            <Text>
+              {score} / {total}
+            </Text>
+            <Flex p={5} w="100%" justifyContent={"space-around"}>
+              <Button
+                bg={"#D01C1F"}
+                fontWeight="bold"
+                color={"#fff"}
+                _hover={{
+                  bg: "#D01C1F",
+                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                }}
+                onClick={() => navigate(-2)}
+              >
+                Play Again
+              </Button>
+              <Button
+                fontWeight="bold"
+                _hover={{
+                  bg: "#00A95C",
+                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                }}
+                bg={"#00A95C"}
+                color={"#fff"}
+                onClick={() => navigate("/")}
+              >
+                Back to Menu
+              </Button>
+            </Flex>
+          </Flex>
+        </Flex>
 
-      <main className="leaderboard__profiles">
-        {leaders.map((leader) => (
-          <Leader {...leader} />
-        ))}
-      </main>
-    </article>
+        <Confetti numberOfPieces={150} width={width} height={height} />
+      </Box>
+    </Flex>
   );
 }
-
-const Leader = ({ name, img, score }) => {
-  return (
-    <article className="leaderboard__profile">
-      <img src={img} alt="Evan Spiegel" className="leaderboard__picture" />
-      <span className="leaderboard__name">{name}</span>
-      <span className="leaderboard__value">
-        {score}
-        <span>Points</span>
-      </span>
-    </article>
-  );
-};

@@ -4,8 +4,12 @@ import lock from "../../assets/lock.png";
 import play from "../../assets/play.png";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import clickSound from "../../assets/audios/click.mp3";
 export default function Categorie({ path, name, img, colors, state }) {
   const navigate = useNavigate();
+  const SoundClick = () => {
+    new Audio(clickSound).play();
+  };
   return (
     <Flex
       bg={`linear-gradient(to Right,${colors.left}, ${colors.right})`}
@@ -15,7 +19,13 @@ export default function Categorie({ path, name, img, colors, state }) {
       p={3}
       flex={1}
       justifyContent={"space-between"}
-      onClick={() => navigate(path)}
+      onClick={() => {
+        SoundClick();
+        navigate(path);
+      }}
+      _hover={{
+        boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+      }}
     >
       <Flex direction={"column"} justifyContent="space-around">
         <Image
