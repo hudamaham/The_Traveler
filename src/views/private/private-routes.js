@@ -28,7 +28,10 @@ export default function PrivateRoutes() {
         <Route path="/results" element={<Result />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-      {["/", "/leaderboard", "/profile"].includes(location.pathname) && (
+
+      {["", "leaderboard", "profile", "city"].includes(
+        location.pathname.split("/")[1]
+      ) && (
         <Flex justifyContent={"center"}>
           <BottomNav />
         </Flex>

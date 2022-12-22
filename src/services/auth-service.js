@@ -5,28 +5,21 @@ import { createSlice } from "@reduxjs/toolkit";
 export const useAuthApi = createApi({
   reducerPath: "AuthApi",
   baseQuery: axiosBaseQuery({
-    baseUrl: "/grayti-api",
+    baseUrl: "/user",
   }),
 
   endpoints: (builder) => ({
     login: builder.mutation({
       query: ({ username, password, email }) => ({
-        url: "/login/",
+        url: "/get_user/",
         method: "post",
         data: { username, password, email },
       }),
     }),
 
-    confirmPassword: builder.mutation({
-      query: ({ name, password }) => ({
-        url: "/password/change",
-        method: "post",
-        data: { name, password },
-      }),
-    }),
     register: builder.mutation({
       query: (newuser) => ({
-        url: "/registration/",
+        url: "/create_user",
         method: "post",
         data: newuser,
       }),
@@ -36,12 +29,12 @@ export const useAuthApi = createApi({
 
 export const {
   useLoginMutation,
-  useConfirmPasswordMutation,
+
   useRegisterMutation,
 } = useAuthApi;
 
 const initialState = {
-  user: undefined,
+  user: {},
   isAuthenticated: false,
   loginError: "",
 };
@@ -67,12 +60,16 @@ const authSlice = createSlice({
     builder.addMatcher(
       useAuthApi.endpoints.login.matchFulfilled,
       (state, action) => {
-        localStorage.setItem("user", action.payload.user);
-        localStorage.setItem("access", action.payload.key);
+        if (action.payload) {
+          localStorage.setItem("user", action.payload);
+          localStorage.setItem("access", action.payload.user);
 
-        state.isAuthenticated = true;
-
-        state.user = action.payload.user;
+          state.isAuthenticated = true;
+          state.loginError = "";
+          state.user = action.payload;
+        } else {
+          state.loginError = "Unvalid  username or password";
+        }
       }
     );
     builder.addMatcher(
@@ -80,19 +77,9 @@ const authSlice = createSlice({
       (state, action) => {
         state.user = undefined;
         state.isAuthenticated = false;
+        console.log(action.payload);
         state.loginError = "Unvalid  username or password";
       }
-    );
-    builder.addMatcher(
-      useAuthApi.endpoints.confirmPassword.matchFulfilled,
-      (state, action) => {
-        state = initialState;
-        localStorage.clear();
-      }
-    );
-    builder.addMatcher(
-      useAuthApi.endpoints.confirmPassword.matchRejected,
-      (state, action) => {}
     );
   },
 });

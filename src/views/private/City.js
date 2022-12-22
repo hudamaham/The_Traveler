@@ -28,16 +28,11 @@ export default function City() {
   return (
     <div className="leaderboard">
       <Header icon={""} title={`City ${cities[id]}`} />
-      <Flex
-        direction={"column"}
-        h="100vh"
-        justifyContent={"space-between"}
-        p={2}
-      >
-        <Text fontSize={40} color={"#f55e7a"} my={3} fontWeight="bold">
+      <Flex direction={"column"} justifyContent={"space-between"} p={2}>
+        <Text fontSize={40} color={"#252733"} my={3} fontWeight="bold">
           {cities[id]}
         </Text>
-        <Flex direction={"column"}>
+        <Flex direction={{ base: "column", md: "row" }} w={"100%"}>
           <Categorie
             path="/game"
             name={"Culture"}

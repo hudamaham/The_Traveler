@@ -13,6 +13,7 @@ export default function Categorie({ path, name, img, colors, state }) {
       mx={10}
       my={4}
       p={3}
+      flex={1}
       justifyContent={"space-between"}
       onClick={() => navigate(path)}
     >

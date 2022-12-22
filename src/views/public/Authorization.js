@@ -52,7 +52,7 @@ export default function Authorization() {
             Se connecter
           </Button>
         </Flex>
-        <Text px={1}>
+        <Text px={1} onClick={() => navigate("/privacy-policy")}>
           By continuing , you agree to the{" "}
           <strong style={{ color: "#fff" }}>Terms </strong>and
           <strong style={{ color: "#fff" }}> Privacy Policy </strong>

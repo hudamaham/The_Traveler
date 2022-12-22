@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Flex, Button, Text, Input } from "@chakra-ui/react";
+import { Flex, Button, Text, Input, Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { logInTemperory } from "../../services/auth-service";
-import { useDispatch } from "react-redux";
+import { useLoginMutation } from "../../services/auth-service";
+import { useDispatch, useSelector } from "react-redux";
 export default function Login() {
+  const [login] = useLoginMutation();
+  const { loginError, isAuthenticated } = useSelector(
+    (state) => state.authentification
+  );
+  const [error, setError] = useState(loginError);
+  const [username, setUser] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
@@ -34,6 +41,12 @@ export default function Login() {
         w={{ base: "100%", md: "50%" }}
         px={4}
       >
+        {error && (
+          <Box bg={"#fff"} p={5} borderRadius={13} textAlign={"center"}>
+            {" "}
+            <Text color={"red"}>{error}</Text>
+          </Box>
+        )}
         <Input
           border={"none"}
           borderBottom={"1px solid #eee"}
@@ -46,6 +59,7 @@ export default function Login() {
             boxShadow: "none",
           }}
           color={"#fff"}
+          onChange={(e) => setUser(e.target.value)}
           placeholder="Nom d'utilisateur"
         />
         <Input
@@ -60,7 +74,9 @@ export default function Login() {
             boxShadow: "none",
           }}
           color={"#fff"}
+          type={"password"}
           placeholder="Mot de passe"
+          onChange={(e) => setPassword(e.target.value)}
         />
       </Flex>
       <Flex
@@ -76,8 +92,17 @@ export default function Login() {
             color={"#252733"}
             mx={3}
             onClick={() => {
-              dispatch(logInTemperory());
-              navigate("/");
+              login({ username: username, password: password }).then((res) => {
+                if (isAuthenticated) {
+                  navigate("/");
+                }
+                else{
+                  setError(loginError);
+                }
+              });
+              // .catch((error) => {
+              //   console.error(error);
+              // });
             }}
           >
             Login

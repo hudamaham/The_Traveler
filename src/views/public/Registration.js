@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import uploadimg from "../../assets/upload.png";
 import { MdFileUpload } from "react-icons/md";
+import { useRegisterMutation } from "../../services/auth-service";
 import { Flex, Image, Button, Text, Input } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 export default function Registration() {
+  const [register] = useRegisterMutation();
   const navigate = useNavigate();
   const [userImage, setUserImage] = useState(null);
+  const [username, setUser] = useState("");
+  const [first, setFirst] = useState("");
+  const [last, setLast] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <Flex
       direction={"column"}
@@ -67,6 +73,7 @@ export default function Registration() {
           }}
           color={"#fff"}
           placeholder="Nom d'utilisateur"
+          onChange={(e) => setUser(e.target.value)}
         />
         <Input
           border={"none"}
@@ -80,7 +87,9 @@ export default function Registration() {
             boxShadow: "none",
           }}
           color={"#fff"}
+          type="password"
           placeholder="Mot de passe"
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Input
           border={"none"}
@@ -95,6 +104,7 @@ export default function Registration() {
           }}
           color={"#fff"}
           placeholder="Prenom"
+          onChange={(e) => setFirst(e.target.value)}
         />
         <Input
           border={"none"}
@@ -109,6 +119,7 @@ export default function Registration() {
           }}
           color={"#fff"}
           placeholder="Nom"
+          onChange={(e) => setLast(e.target.value)}
         />
       </Flex>
       <Flex
@@ -119,7 +130,21 @@ export default function Registration() {
         justifyContent={"space-between"}
       >
         <Flex direction={"column"}>
-          <Button borderRadius={10} color={"#252733"} mx={3}>
+          <Button
+            borderRadius={10}
+            color={"#252733"}
+            mx={3}
+            onClick={() => {
+              register({
+                first: first,
+                last: last,
+                username: username,
+                password: password,
+              }).then(() => {
+                navigate("/login");
+              });
+            }}
+          >
             Register
           </Button>
           <Text

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiLink = "http://127.0.0.1:8000";
+const apiLink = "http://92.204.164.7:8888";
 export const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: apiLink }) =>
   async ({ url, method, data, params }) => {
